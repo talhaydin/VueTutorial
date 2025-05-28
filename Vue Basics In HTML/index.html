@@ -5,20 +5,25 @@
   </head>
   <body>
     <div id="app">
-      <h1>{{ message }}</h1>
-      <p>Your lucky number is: <strong>{{ luckyNumber }}</strong></p>
+      <span v-html="getMessage()"></span>
+      <p v-once>
+        Your first lucky number was: <strong>{{luckyNumber}}</strong>
+      </p>
+      <a v-bind:href="portfolio" target="_blank">portfolio</a>
+      <p>Your updated lucky number is: <strong>{{ luckyNumber }}</strong></p>
+      <p>Unlucky Number: <strong>{{ getUnluckyNumber() }}</strong></p>
       <p>
         Employee Name: <strong>{{ employee.name }}</strong><br />
         Position: <strong>{{ employee.position }}</strong><br />
         Department: <strong>{{ employee.department }}</strong>
       </p>
-      <p>Unlucky Number: <strong>{{ getUnluckyNumber() }}</strong></p>
+      <!-- inline function call just like jsx in React -->
       <p>{{ updateEmployee("Tal", "Software Developer", "Development")}}</p>
-      // Inline function call just like jsx in React
+      <!-- inline function call just like jsx in React -->
     </div>
 
     <script>
-      const { createApp, ref, reactive } = Vue;
+      const { createApp, ref, reactive, onMounted } = Vue;
 
       createApp({
         setup() {
@@ -29,10 +34,7 @@
             position: "Software Developer",
             department: "Development",
           });
-
-          function updateLuckyNumber() {
-            luckyNumber.value = Math.floor(Math.random() * 100) + 1;
-          }
+          const portfolio = "https://talhaaydin.vercel.app/";
 
           function getUnluckyNumber() {
             let unlucky;
@@ -48,6 +50,18 @@
             employee.department = newDepartment;
           }
 
+          function getMessage() {
+            return `<h1><u>${message}</></h1>`;
+          }
+
+          function updateLuckyNumber() {
+            luckyNumber.value = Math.floor(Math.random() * 100) + 1;
+          }
+
+          onMounted(() => {
+            updateLuckyNumber();
+          });
+
           return {
             message,
             luckyNumber,
@@ -55,6 +69,8 @@
             getUnluckyNumber,
             updateLuckyNumber,
             updateEmployee,
+            portfolio,
+            getMessage,
           };
         },
       }).mount("#app");
