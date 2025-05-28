@@ -5,37 +5,59 @@
   </head>
   <body>
     <div id="app">
-      <h1>{{message}}</h1>
-      <p>Your lucky number is: <strong>{{luckyNumber}}</strong></p>
+      <h1>{{ message }}</h1>
+      <p>Your lucky number is: <strong>{{ luckyNumber }}</strong></p>
       <p>
-        Employee Name: <strong>{{employee.name}}</strong><br />
-        Position: <strong>{{employee.position}}</strong><br />
-        Department: <strong>{{employee.department}}</strong>
+        Employee Name: <strong>{{ employee.name }}</strong><br />
+        Position: <strong>{{ employee.position }}</strong><br />
+        Department: <strong>{{ employee.department }}</strong>
       </p>
       <p>Unlucky Number: <strong>{{ getUnluckyNumber() }}</strong></p>
+      <p>{{ updateEmployee("Tal", "Software Developer", "Development")}}</p>
+      // Inline function call just like jsx in React
     </div>
+
+    <script>
+      const { createApp, ref, reactive } = Vue;
+
+      createApp({
+        setup() {
+          const message = "Hello, Vue 3!";
+          const luckyNumber = ref(2);
+          const employee = reactive({
+            name: "Lorem",
+            position: "Software Developer",
+            department: "Development",
+          });
+
+          function updateLuckyNumber() {
+            luckyNumber.value = Math.floor(Math.random() * 100) + 1;
+          }
+
+          function getUnluckyNumber() {
+            let unlucky;
+            do {
+              unlucky = Math.floor(Math.random() * 100) + 1;
+            } while (unlucky === luckyNumber.value);
+            return unlucky;
+          }
+
+          function updateEmployee(newName, newPosition, newDepartment) {
+            employee.name = newName;
+            employee.position = newPosition;
+            employee.department = newDepartment;
+          }
+
+          return {
+            message,
+            luckyNumber,
+            employee,
+            getUnluckyNumber,
+            updateLuckyNumber,
+            updateEmployee,
+          };
+        },
+      }).mount("#app");
+    </script>
   </body>
-  <script>
-    const { createApp } = Vue;
-
-    createApp({
-      setup() {
-        const message = "Hello, Vue 3!";
-        const luckyNumber = Math.floor(Math.random() * 100) + 1;
-        const employee = {
-          name: "Talha",
-          position: "Software Developer",
-          department: "Development",
-        };
-
-        function getUnluckyNumber() {
-          return Math.floor(Math.random() * 100) + 1 !== luckyNumber
-            ? Math.floor(Math.random() * 100) + 1
-            : getUnluckyNumber();
-        }
-
-        return { message, luckyNumber, employee, getUnluckyNumber };
-      },
-    }).mount("#app");
-  </script>
 </html>
