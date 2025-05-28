@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ message }}</h1>
+      <a v-bind:href="portfolio" target="_blank">portfolio</a>
+      <p>Employee Name: <strong>{{ employee.name }}</strong></p>
+      <p>Position: <strong>{{ employee.position }}</strong></p>
+      <p>Department: <strong>{{ employee.department }}</strong></p>
+      <p>His salary is: <strong>{{ employee.salary }}</strong></p>
+      <p v-show="employee.hasCorporateCard">
+        His spending Limit: <strong>{{ employee.spendingLimit }}</strong>
+      </p>
+      <p v-if="employee.yearsWithCompany > 3">
+        He has been with the company for more than 3 years.
+      </p>
+      <p v-else-if="employee.yearsWithCompany === 3">
+        He has been with the company for exactly 3 years.
+      </p>
+      <p v-else>He has been with the company for less than 3 years.</p>
+      <span v-for="(luckyNumber, index) in luckyNumbers"
+        >{{ luckyNumber }} <br
+      /></span>
+      <hr />
+      <ul>
+        <li v-for="(project, index) in employee.projects" :key="project.name">
+          <strong>{{ project.name }}</strong> - {{ project.status }}
+        </li>
+      </ul>
+      <ul>
+        <li v-for="(value, key) in employee">
+          <span> <strong>{{ key }}:</strong> {{ value }} </span>
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      const { createApp, ref, reactive, onMounted } = Vue;
+
+      createApp({
+        setup() {
+          const message = "Hello, Vue 3!";
+          let luckyNumbers = ref([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]);
+          const employee = reactive({
+            name: "Tal",
+            position: "Software Developer",
+            department: "Development",
+            hasCorporateCard: true,
+            salary: 2500,
+            spendingLimit: 10000,
+            yearsWithCompany: 5,
+            projects: [
+              { name: "Project A", status: "Completed" },
+              { name: "Project B", status: "In Progress" },
+            ],
+          });
+          const portfolio = "https://talhaaydin.vercel.app/";
+
+          return {
+            message,
+            employee,
+            portfolio,
+            luckyNumbers,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
