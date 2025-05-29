@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div v-bind:style="{backgroundColor: 'aqua', fontSize: fontSize + 'px'}">
+        Hello
+      </div>
+      <div class="h1">Heading 1</div>
+      <div class="bg-pink">Hi</div>
+      <span v-bind:class="{'h2': true}">v-bind class</span>
+      <span v-bind:class="{'h2': isMainTitle()}">isMainTitle</span>
+    </div>
+
+    <script>
+      const { createApp, ref, reactive, onMounted } = Vue;
+      const fontSize = 60;
+
+      function isMainTitle() {
+        return true;
+      }
+
+      createApp({
+        setup() {
+          return { fontSize, isMainTitle };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+  <style>
+    .h1 {
+      font-size: 60px;
+      background-color: blueviolet;
+    }
+    .h2 {
+      font-size: 50px;
+      background-color: blue;
+      display: block;
+    }
+    .bg-pink {
+      background-color: pink;
+    }
+  </style>
+</html>
