@@ -1,0 +1,32 @@
+{
+  "destination": [
+    {
+      "id": 1,
+      "name": "Paris",
+      "country": "France",
+      "description": "The capital city of France, known for its art, fashion, and culture.",
+      "image": "https://example.com/images/paris.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Tokyo",
+      "country": "Japan",
+      "description": "The bustling capital of Japan, famous for its modern skyscrapers and traditional temples.",
+      "image": "https://example.com/images/tokyo.jpg"
+    },
+    {
+      "id": 3,
+      "name": "New York",
+      "country": "USA",
+      "description": "Known as the Big Apple, it's famous for its skyline, Broadway shows, and diverse culture.",
+      "image": "https://example.com/images/newyork.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Sydney",
+      "country": "Australia",
+      "description": "Famous for its Sydney Opera House and Harbour Bridge, it's a vibrant city by the sea.",
+      "image": "https://example.com/images/sydney.jpg"
+    }
+  ]
+}
